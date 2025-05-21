@@ -110,7 +110,6 @@ app.post("/api/chat", async (req, res) => {
   if (!sessionId || !userMessage) {
     return res.status(400).json({ result: "sessionId et userMessage sont requis." });
   }
-
   // Initialiser conversation si elle n'existe pas
   if (!conversations[sessionId]) {
     conversations[sessionId] = [{ role: "system", content: systemPrompt }];
