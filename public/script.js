@@ -1,3 +1,7 @@
+const base = "https://mentora-ai.onrender.com";
+// const base = "http://localhost:5000";
+
+
 // === Récupération des éléments du DOM ===
 const toggleBtn = document.getElementById("toggle-btn");
 const sidebar = document.getElementById("sidebar");
@@ -162,7 +166,8 @@ async function sendMessage() {
   displayMessage("bot", "typing");
 
   try {
-    const response = await fetch("http://localhost:5000/api/chat", {
+    const response = await fetch(`${base}/api/chat`
+, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
