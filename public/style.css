@@ -9,6 +9,7 @@ body {
   display: flex;
   height: 100vh;
   overflow: hidden;
+
 }
 
 .sidebar {
@@ -102,8 +103,9 @@ body {
 }
 
 .chat-box {
-  flex: 1;
+ 
   padding: 20px;
+    flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -117,6 +119,7 @@ body {
   line-height: 1.4;
   white-space: pre-wrap;
   font-size: 1em;
+  margin-bottom: 50px;
 }
 
 .user {
@@ -132,6 +135,8 @@ body {
   color: #fff;
   border-bottom-left-radius: 0;
   position: relative;
+
+  margin-bottom: 200px;
 }
 
 /* Animation "typing" */
@@ -227,6 +232,8 @@ body {
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .sidebar {
@@ -264,27 +271,72 @@ body {
   .main {
     margin-top: 0;
     padding-top: 50px;
-  }
-
-  .chat-input {
+    padding-bottom: 50px;
+    flex: 1;
+    display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  
   }
 
-  .chat-input input,
+   .chat-input input,
   .chat-input select,
   .chat-input button {
     width: 100%;
     margin-top: 5px;
   }
 
+  
+
+  .chat-input {
+    flex-direction: column;
+    position: fixed;
+      bottom: 0;
+      width: 100%;
+         position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+     
+  }
+
+  .chat-input input,
+  .chat-input select,
+  .chat-input button {
+    width: 100%;
+    margin: 5px auto;
+  }
+
+
   .chat-box {
     padding: 10px;
+    margin: 20px auto;
+    .chat-box {
+  flex: 1;
+  padding: 10px;
+  margin: 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px); /* Ajuste selon la hauteur du header + input */
+ 
+
+  padding-bottom: 5000px; /* espace réservé pour l'input */
+
+  
+}
   }
 
   .message {
     max-width: 100%;
   }
+  
 }
+
+
 
 .rename-input {
   width: 100%;
@@ -297,3 +349,10 @@ body {
 .chat-title {
   cursor: pointer;
 }
+
+
+
+
+
+
+

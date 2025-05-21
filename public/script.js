@@ -2,6 +2,9 @@ const base = "https://mentora-ai.onrender.com";
 // const base = "http://localhost:5000";
 
 
+
+
+
 // === Récupération des éléments du DOM ===
 const toggleBtn = document.getElementById("toggle-btn");
 const sidebar = document.getElementById("sidebar");
@@ -36,7 +39,7 @@ function newChat() {
   const newId = Date.now().toString();
   const newChat = {
     id: newId,
-    title: "", // Le titre sera défini après le 1er message
+    title: "", // Titre à définir après premier message
     messages: [],
   };
   chatHistory.unshift(newChat);
@@ -49,13 +52,37 @@ function newChat() {
   }
 }
 
-// === Met à jour la sidebar avec les sessions ===
+// === Met à jour la sidebar ===
 function updateSidebar() {
   historyList.innerHTML = "";
   chatHistory.forEach((chat) => {
     const li = document.createElement("li");
-    li.innerText = chat.title || "Session sans titre";
     li.classList.toggle("active", chat.id === currentChatId);
+
+    const span = document.createElement("span");
+    span.textContent = chat.title || "Session sans titre";
+    span.classList.add("chat-title");
+
+    // === Renommage au double-clic ===
+    span.ondblclick = () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = span.textContent;
+      input.classList.add("rename-input");
+      li.replaceChild(input, span);
+      input.focus();
+
+      input.onblur = () => {
+        const newTitle = input.value.trim() || "Session sans titre";
+        chat.title = newTitle;
+        saveData();
+        updateSidebar();
+      };
+
+      input.onkeydown = (e) => {
+        if (e.key === "Enter") input.blur();
+      };
+    };
 
     li.onclick = () => {
       loadChat(chat.id);
@@ -73,6 +100,7 @@ function updateSidebar() {
       deleteChat(chat.id);
     };
 
+    li.appendChild(span);
     li.appendChild(delBtn);
     historyList.appendChild(li);
   });
@@ -92,13 +120,13 @@ function loadChat(id) {
   scrollToBottom();
 }
 
-// === Sauvegarde l'historique et la session courante dans localStorage ===
+// === Sauvegarde les données ===
 function saveData() {
   localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
   localStorage.setItem("currentChatId", currentChatId);
 }
 
-// === Supprime une session de chat ===
+// === Supprime une session ===
 function deleteChat(id) {
   chatHistory = chatHistory.filter((chat) => chat.id !== id);
   if (currentChatId === id) {
@@ -113,7 +141,7 @@ function deleteChat(id) {
   }
 }
 
-// === Affiche un message dans la boîte de chat ===
+// === Affiche un message dans le chat ===
 function displayMessage(sender, text) {
   const div = document.createElement("div");
   div.classList.add("message", sender);
@@ -127,12 +155,12 @@ function displayMessage(sender, text) {
   scrollToBottom();
 }
 
-// === Scroll vers le bas pour afficher le dernier message ===
+// === Scroll en bas ===
 function scrollToBottom() {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// === Gère l'appui sur la touche Entrée pour envoyer le message ===
+// === Gère la touche entrée ===
 function handleKeyPress(e) {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -140,7 +168,7 @@ function handleKeyPress(e) {
   }
 }
 
-// === Envoie le message utilisateur au backend et gère la réponse ===
+// === Envoie un message et reçoit la réponse du backend ===
 async function sendMessage() {
   const userMessage = userInput.value.trim();
   if (!userMessage) return;
@@ -148,26 +176,21 @@ async function sendMessage() {
   if (!currentChatId) newChat();
   const chat = chatHistory.find((c) => c.id === currentChatId);
 
-  // === Met à jour le titre si c'est le premier message
   if (chat.messages.length === 0) {
     const titleFromMessage = userMessage.split(" ").slice(0, 4).join(" ");
     chat.title = titleFromMessage.charAt(0).toUpperCase() + titleFromMessage.slice(1);
     updateSidebar();
   }
 
-  // === Affiche le message utilisateur
   displayMessage("user", userMessage);
   chat.messages.push({ sender: "user", text: userMessage });
   saveData();
 
   userInput.value = "";
-
-  // === Affiche le message "typing"
   displayMessage("bot", "typing");
 
   try {
-    const response = await fetch(`${base}/api/chat`
-, {
+    const response = await fetch(`${base}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -181,11 +204,9 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    // Supprime "typing"
     const typingMsg = document.querySelector(".bot.typing");
     if (typingMsg) typingMsg.remove();
 
-    // Affiche la réponse du bot
     displayMessage("bot", data.result);
     chat.messages.push({ sender: "bot", text: data.result });
     saveData();
@@ -197,3 +218,18 @@ async function sendMessage() {
     console.error("Erreur API :", error);
   }
 }
+
+
+function scrollToBottom() {
+  const chatBox = document.getElementById("chatBox");
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+// Sur mobile : ajuste la vue quand le clavier s'affiche
+window.addEventListener("resize", () => {
+  const chatInput = document.querySelector(".chat-input");
+  const chatBox = document.querySelector(".chat-box");
+  // Sur mobile : clavier visible = plus petit viewport
+  if (window.innerHeight < 500) {
+    chatInput.scrollIntoView({ behavior: "smooth", block: "end" });
+  }
+});
