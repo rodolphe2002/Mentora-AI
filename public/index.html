@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mon Assistant IA</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <button id="toggle-btn">☰ Menu</button>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <h2>Mentora</h2>
+      <button onclick="newChat()">+ Nouvelle session</button>
+      <ul id="history"></ul>
+    </aside>
+    <main class="main">
+      <div class="chat-header">Assistant IA d'apprentissage</div>
+      <div class="chat-box" id="chatBox"></div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Pose ta question ici..."
+          onkeypress="handleKeyPress(event)"
+          autocomplete="off"
+        />
+        <select id="niveau">
+          <option value="débutant">Débutant</option>
+          <option value="intermédiaire">Intermédiaire</option>
+          <option value="avancé">Avancé</option>
+        </select>
+        <button onclick="sendMessage()">Envoyer</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
