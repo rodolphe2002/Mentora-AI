@@ -251,3 +251,8 @@ window.addEventListener("resize", () => {
     chatInput.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 });
+
+
+
+
+
