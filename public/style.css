@@ -181,9 +181,10 @@ body {
 .chat-header {
   padding: 18px 24px;
   background: var(--bg-panel);
+  /* filter: blur(5px); */
   font-weight: 600;
   border-bottom: 1px solid var(--border);
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 10;
   font-size: 1.1rem;
@@ -191,6 +192,7 @@ body {
   display: flex;
   align-items: center;
   box-shadow: 0 1px 3px var(--shadow);
+  width: 100%;
 }
 
 .chat-box {
@@ -202,6 +204,7 @@ body {
   gap: 20px;
   position: relative;
   padding-bottom: 100px;
+  margin-top: 50px;
 }
 
 /* ===== MESSAGES STYLE ===== */
@@ -404,7 +407,7 @@ body {
 
   .chat-box {
     padding: 16px;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
   }
 
   .message {
@@ -443,7 +446,7 @@ body {
 
 /* ===== ELEGANT EFFECTS ===== */
 .sidebar, .chat-header, .chat-input {
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(6px);
 }
 
