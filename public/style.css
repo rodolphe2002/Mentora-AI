@@ -520,12 +520,12 @@ body {
 
   .main {
     margin-top: 0;
-    padding-bottom: 80px;
+    padding-bottom: 20px;
   }
 
   .chat-box {
     padding: 15px;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
   }
 
   .message {
@@ -544,7 +544,6 @@ body {
   }
 
   .chat-input input,
-  .chat-input select,
   .chat-input button {
     width: 100%;
   }

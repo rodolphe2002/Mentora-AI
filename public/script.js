@@ -1,9 +1,6 @@
-const base = "https://mentora-ai.onrender.com";
-// const base = "http://localhost:5000";
-
-
-
-
+const base = window.location.hostname === "localhost"
+  ? "http://localhost:5000"
+  : "https://mentora-ai.onrender.com";
 
 // === Récupération des éléments du DOM ===
 const toggleBtn = document.getElementById("toggle-btn");
@@ -11,7 +8,6 @@ const sidebar = document.getElementById("sidebar");
 const chatBox = document.getElementById("chatBox");
 const historyList = document.getElementById("history");
 const userInput = document.getElementById("userInput");
-const niveauSelect = document.getElementById("niveau");
 
 let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
 let currentChatId = localStorage.getItem("currentChatId") || null;
@@ -39,7 +35,7 @@ function newChat() {
   const newId = Date.now().toString();
   const newChat = {
     id: newId,
-    title: "", // Titre à définir après premier message
+    title: "",
     messages: [],
   };
   chatHistory.unshift(newChat);
@@ -195,8 +191,7 @@ async function sendMessage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sessionId: currentChatId,
-        userMessage: userMessage,
-        niveau: niveauSelect.value,
+        userMessage: userMessage
       }),
     });
 
@@ -219,16 +214,10 @@ async function sendMessage() {
   }
 }
 
-
-function scrollToBottom() {
-  const chatBox = document.getElementById("chatBox");
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
 // Sur mobile : ajuste la vue quand le clavier s'affiche
 window.addEventListener("resize", () => {
   const chatInput = document.querySelector(".chat-input");
   const chatBox = document.querySelector(".chat-box");
-  // Sur mobile : clavier visible = plus petit viewport
   if (window.innerHeight < 500) {
     chatInput.scrollIntoView({ behavior: "smooth", block: "end" });
   }
