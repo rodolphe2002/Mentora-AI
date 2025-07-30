@@ -27,8 +27,11 @@ body {
   font-family: 'Exo 2', sans-serif;
   background: var(--bg-dark);
   color: var(--text);
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh;
+  overflow: hidden; */
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-image: 
     radial-gradient(circle at 25% 25%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 75% 75%, rgba(255, 45, 117, 0.1) 0%, transparent 50%);
@@ -63,10 +66,16 @@ body {
 
 /* ===== LAYOUT ===== */
 .app {
+  
+  min-height: 100vh;
+  height: auto;
+  flex-direction: column;
+
+/* 
   display: flex;
   height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 /* ===== SIDEBAR FUTURISTE ===== */
@@ -233,7 +242,7 @@ body {
   text-align: center;
   font-size: 1.1rem;
   border-bottom: 1px solid var(--glass-border);
-  position: relative;
+  position: fixed;
   z-index: 10;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 1px;
@@ -251,7 +260,12 @@ body {
   gap: 15px;
   position: relative;
   z-index: 1;
+   padding-bottom: 120px; /* Laisse de l'espace pour le clavier / input */
 }
+
+ 
+
+
 
 /* Effet holographique derrière les messages */
 .chat-box::before {
@@ -526,6 +540,7 @@ body {
   .chat-box {
     padding: 15px;
     margin-bottom: 100px;
+    margin-top: 80px;
   }
 
   .message {
@@ -559,6 +574,24 @@ body {
   margin-left: 50px;
 
 }
+.chat-input {
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+
+.chat-input input,
+.chat-input button {
+  width: 100%;
+  font-size: 1rem;
+}
+
 
 }
 
