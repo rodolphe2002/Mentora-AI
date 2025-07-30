@@ -59,7 +59,7 @@ function updateSidebar() {
     span.textContent = chat.title || "Session sans titre";
     span.classList.add("chat-title");
 
-    // === Renommage au double-clic ===
+    // Renommage au double-clic
     span.ondblclick = () => {
       const input = document.createElement("input");
       input.type = "text";
@@ -113,7 +113,13 @@ function loadChat(id) {
   });
   saveData();
   updateSidebar();
-  scrollToBottom();
+
+  chatBox.classList.toggle("empty", chat.messages.length === 0);
+
+  setTimeout(() => {
+    updateChatBoxHeight();
+    scrollToBottom();
+  }, 50);
 }
 
 // === Sauvegarde les données ===
@@ -137,23 +143,38 @@ function deleteChat(id) {
   }
 }
 
-// === Affiche un message dans le chat ===
+// === Affiche un message dans le chat (sans scroll automatique) ===
 function displayMessage(sender, text) {
   const div = document.createElement("div");
   div.classList.add("message", sender);
+
   if (sender === "bot" && text === "typing") {
     div.classList.add("typing");
     div.innerText = "Assistant IA est en train d’écrire...";
   } else {
     div.innerText = text;
   }
+
   chatBox.appendChild(div);
-  scrollToBottom();
+
+  // Supprime la classe empty si un message est ajouté
+  if (chatBox.classList.contains("empty")) {
+    chatBox.classList.remove("empty");
+  }
+
+  updateChatBoxHeight();
+  // On ne scroll pas ici pour éviter le scroll sur message utilisateur
 }
 
 // === Scroll en bas ===
 function scrollToBottom() {
   chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// === Met à jour la hauteur max du chat box (optionnel) ===
+function updateChatBoxHeight() {
+  const scrollHeight = chatBox.scrollHeight;
+  chatBox.style.maxHeight = scrollHeight + "px";
 }
 
 // === Gère la touche entrée ===
@@ -205,19 +226,27 @@ async function sendMessage() {
     displayMessage("bot", data.result);
     chat.messages.push({ sender: "bot", text: data.result });
     saveData();
+
+    // Scroll ici après ajout du message bot
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50);
   } catch (error) {
     const typingMsg = document.querySelector(".bot.typing");
     if (typingMsg) typingMsg.remove();
 
     displayMessage("bot", "❌ Une erreur est survenue. Réessaie plus tard.");
     console.error("Erreur API :", error);
+
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50);
   }
 }
 
 // Sur mobile : ajuste la vue quand le clavier s'affiche
 window.addEventListener("resize", () => {
   const chatInput = document.querySelector(".chat-input");
-  const chatBox = document.querySelector(".chat-box");
   if (window.innerHeight < 500) {
     chatInput.scrollIntoView({ behavior: "smooth", block: "end" });
   }

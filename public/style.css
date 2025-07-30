@@ -457,3 +457,31 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(6px);
 }
+
+
+
+
+.chat-box.empty {
+  height: 150px;
+  max-height: 150px;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.chat-box:not(.empty) {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+
+
+.chat-box {
+  max-height: 150px; /* Hauteur de départ */
+  overflow-y: auto;
+  transition: max-height 0.4s ease;
+}
+
+/* Quand elle grandit */
+.chat-box.expand {
+  max-height: 1000px; /* Grande valeur qui couvre la plupart des cas */
+}
