@@ -13,7 +13,7 @@ const QCM_STATE_FILE = path.join(__dirname, "qcm-state.json");
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 const conversations = {}; // clé = sessionId, valeur = tableau de messages
 const sessionLevels = {}; // clé = sessionId, valeur = niveau d'études
@@ -365,7 +365,7 @@ N'ajoute aucun texte avant ou apres.`;
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.listen(PORT, () => {
