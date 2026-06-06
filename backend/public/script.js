@@ -12,9 +12,46 @@ const userInput = document.getElementById("userInput");
 let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
 let currentChatId = localStorage.getItem("currentChatId") || null;
 
+const toggleIcon = toggleBtn.querySelector(".toggle-icon");
+
+function updateToggleIcon() {
+  if (toggleIcon) {
+    toggleIcon.src = sidebar.classList.contains("active") ? "fermer.svg" : "menu.svg";
+    toggleIcon.alt = sidebar.classList.contains("active") ? "Fermer" : "Menu";
+  }
+}
+
+const chatInput = document.querySelector(".chat-input");
+
+function hideChatInput() {
+  if (chatInput) chatInput.style.display = "none";
+}
+
+function showChatInput() {
+  if (chatInput) chatInput.style.display = "flex";
+}
+
+// === Animation icone d'envoi ===
+const sendIcon = document.getElementById("sendIcon");
+const sendBtn = document.getElementById("sendBtn");
+
+if (userInput && sendIcon) {
+  userInput.addEventListener("input", () => {
+    const hasText = userInput.value.trim().length > 0;
+    if (hasText) {
+      sendIcon.src = "envoi-actif.svg";
+      if (sendBtn) sendBtn.style.color = "#3c9196";
+    } else {
+      sendIcon.src = "envoi.svg";
+      if (sendBtn) sendBtn.style.color = "";
+    }
+  });
+}
+
 // === Toggle sidebar ===
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
+  updateToggleIcon();
 });
 
 // === Au chargement de la page ===
@@ -84,6 +121,7 @@ function newChat() {
   loadChat(newId);
   if (window.innerWidth <= 768) {
     sidebar.classList.remove("active");
+    updateToggleIcon();
   }
 }
 
@@ -123,6 +161,7 @@ function updateSidebar() {
       loadChat(chat.id);
       if (window.innerWidth <= 768) {
         sidebar.classList.remove("active");
+        updateToggleIcon();
       }
     };
 
@@ -247,6 +286,7 @@ function displayMessage(sender, text) {
   }
 
   updateChatBoxHeight();
+  if (text !== "typing") showChatInput();
   // On ne scroll pas ici pour éviter le scroll sur message utilisateur
 }
 
@@ -399,6 +439,7 @@ function displaySommaireMessage(text) {
   }
   updateChatBoxHeight();
   displaySommaireActions();
+  hideChatInput();
 }
 
 function displaySommaireActions() {
@@ -474,6 +515,7 @@ function displayComprehensionActions() {
     chatBox.classList.remove("empty");
   }
   updateChatBoxHeight();
+  hideChatInput();
   setTimeout(() => scrollToBottom(), 50);
 }
 
@@ -549,6 +591,7 @@ function displayChapitreMessage(text) {
   }
   updateChatBoxHeight();
   displayComprehensionActions();
+  hideChatInput();
 }
 
 // === QCM ===
@@ -669,6 +712,7 @@ function displayQCMMessage(text) {
     chatBox.classList.remove("empty");
   }
   updateChatBoxHeight();
+  hideChatInput();
 }
 
 // === Modale QCM ===
@@ -781,6 +825,7 @@ function displayNiveauSelector(sujet) {
   }
 
   updateChatBoxHeight();
+  hideChatInput();
   setTimeout(() => {
     scrollToBottom();
   }, 50);

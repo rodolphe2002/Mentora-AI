@@ -41,8 +41,31 @@ function saveQCMState() {
   }
 }
 
-// Charger au demarrage
-loadQCMState();
+// === ETAT DU SOMMAIRE ===
+const SOMMAIRE_STATE_FILE = path.join(__dirname, "sommaire-state.json");
+const sessionSommaireState = {}; // clé = sessionId, valeur = null | "waiting_validation" | "waiting_feedback"
+
+function loadSommaireState() {
+  try {
+    if (fs.existsSync(SOMMAIRE_STATE_FILE)) {
+      const data = fs.readFileSync(SOMMAIRE_STATE_FILE, "utf8");
+      const parsed = JSON.parse(data);
+      Object.assign(sessionSommaireState, parsed);
+    }
+  } catch (err) {
+    console.error("Erreur chargement sommaire state:", err);
+  }
+}
+
+function saveSommaireState() {
+  try {
+    fs.writeFileSync(SOMMAIRE_STATE_FILE, JSON.stringify(sessionSommaireState, null, 2), "utf8");
+  } catch (err) {
+    console.error("Erreur sauvegarde sommaire state:", err);
+  }
+}
+
+loadSommaireState();
 
 function getNiveauInstruction(niveau) {
   const instructions = {
@@ -148,10 +171,40 @@ app.post("/api/chat", async (req, res) => {
   const lowerMsg = userMessage.trim().toLowerCase();
 
   // Sommaire
+  const sommaireState = sessionSommaireState[sessionId] || null;
+
   if (lowerMsg === "commençons" || lowerMsg === "commencons") {
+    sessionSommaireState[sessionId] = null;
+    saveSommaireState();
     messageToSend = "L'eleve a valide le sommaire et souhaite commencer. Presente immediatement le Chapitre 1 avec la carte pedagogique (badge, titre, sous-titre) puis explique la premiere notion.";
   } else if (lowerMsg === "je ne suis pas d'accord" || lowerMsg === "je ne suis pas d accord") {
-    messageToSend = "L'eleve n'est pas satisfait du sommaire. Demande-lui poliment et simplement quelles modifications il souhaite apporter au sommaire (ajouter, supprimer ou modifier des sections). Ne recommence pas le cours, ne dis pas 'ne t'inquiete pas', concentre-toi sur la question de modification.";
+    sessionSommaireState[sessionId] = "waiting_feedback";
+    saveSommaireState();
+    messageToSend = "L'eleve n'est pas satisfait du sommaire. Dis exactement : 'D'accord. Explique-moi ce que tu souhaites modifier, ajouter, supprimer ou ameliorer dans ce programme afin que je puisse le personnaliser selon tes besoins.' Ne recommence pas le cours, ne dis pas 'ne t'inquiete pas', concentre-toi sur la question de modification.";
+  } else if (sommaireState === "waiting_feedback") {
+    // L'eleve a fourni ses remarques, regenerer le sommaire
+    sessionSommaireState[sessionId] = "waiting_validation";
+    saveSommaireState();
+    messageToSend = `L'eleve a fait les remarques suivantes sur le sommaire : "${userMessage}"
+
+REGENERE le sommaire en prenant COMPLETEMENT compte de ces remarques. Utilise EXACTEMENT ce format :
+
+===SOMMAIRE===
+1. Titre de la premiere section
+Description de la section en une ou deux phrases.
+
+2. Titre de la deuxieme section
+Description de la section en une ou deux phrases.
+...
+===FIN SOMMAIRE===
+
+Regles :
+- 5 a 10 sections.
+- Chaque section : numero + titre sur la meme ligne, puis une description courte de 1 a 2 phrases.
+- Saute une ligne entre chaque section.
+- N'ajoute aucun texte avant ===SOMMAIRE===.
+- Apres ===FIN SOMMAIRE===, ecris seulement : "Voici le sommaire mis a jour. Est-ce que cela te convient ? Souhaites-tu que je modifie quelque chose avant de commencer ?"
+- NE REDEMANDE PAS les remarques de l'eleve, elles ont deja ete prises en compte.`;
   }
 
   // Comprehension chapitre
@@ -348,6 +401,12 @@ N'ajoute aucun texte avant ou apres.`;
           saveQCMState();
         }
       }
+    }
+
+    // 10b. Si un sommaire est present dans la reponse, mettre a jour l'etat
+    if (assistantReply.includes('===SOMMAIRE===')) {
+      sessionSommaireState[sessionId] = "waiting_validation";
+      saveSommaireState();
     }
 
     // 11. Nettoyer les lignes vides multiples

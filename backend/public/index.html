@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mon Assistant IA</title>
-  <link rel="stylesheet" href="./style.css?v=36" />
+  <link rel="stylesheet" href="./style.css?v=40" />
 </head>
 <body>
-  <button id="toggle-btn" class="toggle-btn"><img src="menu.svg" alt="Menu" /></button>
+  <button id="toggle-btn" class="toggle-btn"><img src="menu.svg" alt="Menu" class="toggle-icon" /></button>
   <div class="app">
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
@@ -34,8 +34,8 @@
           onkeypress="handleKeyPress(event)"
           autocomplete="off"
         />
-        <button class="input-icon-right" onclick="sendMessage()" type="button" title="Envoyer">
-          <img src="envoi.svg" alt="Envoyer" />
+        <button class="input-icon-right" id="sendBtn" onclick="sendMessage()" type="button" title="Envoyer">
+          <img src="envoi.svg" alt="Envoyer" id="sendIcon" />
         </button>
       </div>
     </main>
@@ -52,6 +52,6 @@
     </div>
   </div>
 
-  <script src="./script.js?v=40"></script>
+  <script src="./script.js?v=45"></script>
 </body>
 </html>
