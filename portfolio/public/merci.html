@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merci pour votre message</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ff014f;
+      --secondary: #00f3ff;
+      --dark: #0a0a12;
+      --darker: #050509;
+      --light: #f0f0f7;
+      --gray: #1a1a24;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --glow: 0 0 15px rgba(255, 1, 79, 0.7);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--darker), var(--dark));
+      color: var(--light);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+          radial-gradient(circle at 10% 20%, rgba(255, 1, 79, 0.1) 0%, transparent 20%),
+          radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 20%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    /* Particules en arrière-plan */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    /* Logo en haut à gauche */
+    .logo {
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
+      z-index: 10;
+    }
+    
+    .confirmation-box {
+      background: rgba(26, 26, 36, 0.8);
+      border-radius: 25px;
+      padding: 60px 80px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      max-width: 700px;
+      width: 90%;
+      transform: translateY(30px);
+      opacity: 0;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    
+    .bar-animation  {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.2s ease;
+    }
+
+    .bar-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 0%;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  transition: width 1.5s ease;
+}
+
+    
+    .confirmation-icon {
+      font-size: 5rem;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      color: rgba(240, 240, 247, 0.85);
+      line-height: 1.8;
+    }
+    
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      box-shadow: 0 10px 20px rgba(255, 1, 79, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+    
+    .home-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(255, 1, 79, 0.5);
+    }
+    
+    .floating-icons {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      gap: 20px;
+      z-index: 5;
+    }
+    
+    .floating-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .floating-icons a:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: var(--glow);
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating-icon {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.3;
+      z-index: 1;
+    }
+    
+    .icon-1 {
+      top: 15%;
+      left: 10%;
+      animation: float 6s ease-in-out infinite;
+      color: var(--primary);
+    }
+    
+    .icon-2 {
+      bottom: 20%;
+      right: 12%;
+      animation: float 7s ease-in-out infinite;
+      animation-delay: 0.5s;
+      color: var(--secondary);
+    }
+    
+    .icon-3 {
+      top: 25%;
+      right: 20%;
+      animation: float 5.5s ease-in-out infinite;
+      animation-delay: 1s;
+      color: var(--primary);
+    }
+    
+    .icon-4 {
+      bottom: 30%;
+      left: 15%;
+      animation: float 6.5s ease-in-out infinite;
+      animation-delay: 1.5s;
+      color: var(--secondary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .confirmation-box {
+        padding: 40px 30px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      p {
+        font-size: 1.1rem;
+      }
+      
+      .logo {
+        top: 20px;
+        left: 20px;
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .confirmation-box {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .confirmation-icon {
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particules en arrière-plan -->
+  <div id="particles-js"></div>
+  
+  <!-- Logo -->
+
+  
+  <!-- Icônes flottantes décoratives -->
+  <i class="fas fa-envelope floating-icon icon-1"></i>
+  <i class="fas fa-check floating-icon icon-2"></i>
+  <i class="fas fa-paper-plane floating-icon icon-3"></i>
+  <i class="fas fa-comment floating-icon icon-4"></i>
+  
+  <!-- Contenu principal -->
+  <div class="confirmation-box">
+    <div class="bar-animation"></div>
+
+    <i class="fas fa-check-circle confirmation-icon"></i>
+    <h1>Message envoyé avec succès !</h1>
+    <p>Merci de m'avoir contacté. Je traite votre demande et vous répondrai dans les plus brefs délais.</p>
+    <a href="index.html" class="home-btn">
+      <i class="fas fa-home"></i> Retour à l'accueil
+    </a>
+  </div>
+  
+  <!-- Liens sociaux flottants -->
+  <div class="floating-icons">
+    <a href="https://www.facebook.com/share/12FzP6pXNUe/?mibextid=LQQJ4d" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/bah-rodolphe-kouadio-036405347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+  </div>
+
+  <script>
+    // Initialisation des particules
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 60,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#ff014f"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 2,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#00f3ff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 1,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "push": {
+            "particles_nb": 4
+          }
+        }
+      },
+      "retina_detect": true
+    });
+    
+    // Animation d'apparition de la boîte
+    gsap.to(".confirmation-box", {
+      duration: 1.2,
+      opacity: 1,
+      y: 0,
+      ease: "power3.out",
+      delay: 0.3
+    });
+    
+    // Animation de la barre de progression
+    gsap.to(".bar-animation", {
+      duration: 1.5,
+      transform: "scaleX(1)",
+      ease: "power2.out",
+      delay: 0.5
+    });
+    
+    // Animation du bouton
+    gsap.from(".home-btn", {
+      duration: 1,
+      opacity: 0,
+      scale: 0.8,
+      ease: "elastic.out(1, 0.8)",
+      delay: 1.2
+    });
+  </script>
+</body>
+</html>

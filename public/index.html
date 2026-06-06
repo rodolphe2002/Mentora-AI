@@ -4,37 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mon Assistant IA</title>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css?v=36" />
 </head>
 <body>
-  <button id="toggle-btn" class="toggle-btn">☰</button>
+  <button id="toggle-btn" class="toggle-btn"><img src="menu.svg" alt="Menu" /></button>
   <div class="app">
     <aside class="sidebar" id="sidebar">
-      <h2>Mentora</h2>
-      <button onclick="newChat()">+ Nouvelle session</button>
-      <ul id="history"></ul>
+      <div class="sidebar-top">
+        <button class="sidebar-btn" onclick="newChat()">
+          <img src="modifier-message.svg" alt="Nouveau cours" />
+          <span>Nouveau cours</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Cours récents</div>
+        <ul id="history"></ul>
+      </div>
     </aside>
     <main class="main">
-      <div class="chat-header">Assistant IA d'apprentissage</div>
+      <div class="chat-header">Mentora</div>
       <div class="chat-box empty" id="chatBox"></div>
+      <div class="scroll-indicator" id="scrollIndicator"></div>
       <div class="chat-input">
         <input
           type="text"
           id="userInput"
-          placeholder="Pose ta question ici..."
+          placeholder="Demander à Mentora"
           onkeypress="handleKeyPress(event)"
           autocomplete="off"
         />
-        <!-- <select id="niveau">
-          <option value="débutant">Débutant</option>
-          <option value="intermédiaire">Intermédiaire</option>
-          <option value="avancé">Avancé</option>
-        </select> -->
-        <button onclick="sendMessage()">Envoyer</button>
+        <button class="input-icon-right" onclick="sendMessage()" type="button" title="Envoyer">
+          <img src="envoi.svg" alt="Envoyer" />
+        </button>
       </div>
     </main>
   </div>
 
-  <script src="./script.js"></script>
+  <!-- Modale QCM Resultat -->
+  <div id="qcmModal" class="qcm-modal hidden">
+    <div class="qcm-modal-backdrop"></div>
+    <div class="qcm-modal-card">
+      <img id="qcmModalIcon" src="" alt="" class="qcm-modal-icon" />
+      <div id="qcmModalTitle" class="qcm-modal-title"></div>
+      <div id="qcmModalText" class="qcm-modal-text"></div>
+      <button id="qcmModalBtn" class="qcm-modal-btn"></button>
+    </div>
+  </div>
+
+  <script src="./script.js?v=39"></script>
 </body>
 </html>

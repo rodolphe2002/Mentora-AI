@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Kouadio Bah Rodolphe - Développeur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particules en arrière-plan -->
+    <div id="particles-js"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo"></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-text animated-element">
+                <h1>
+                    Bonjour, je suis <span class="highlight">Kouadio Bah Rodolphe</span>
+                    <br><span>Développeur full-stack junior</span>
+                </h1>
+                <p>
+                    Spécialisé en développement web et mobile, je conçois des solutions modernes, 
+                    performantes et adaptées aux besoins des entreprises. Actuellement en pleine 
+                    évolution, je suis à la recherche de projets stimulants, de missions freelance 
+                    ou d'opportunités professionnelles.
+                </p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/12FzP6pXNUe/?mibextid=LQQJ4d" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bah-rodolphe-kouadio-036405347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/rodolphe2002" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-container">
+                    <img src="./img/profil.jpg" alt="Photo de Profil" class="profile-img">
+                    <div class="glowing-ring"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-grid">
+            <div class="about-content animated-element">
+                <p>
+                    Je suis <strong>Kouadio Bah Rodolphe</strong>, développeur passionné par la création de solutions digitales modernes et performantes.
+                    Mon parcours en <strong>Génie Logiciel</strong> m’a permis d’acquérir une solide expérience en développement web, en analyse de données,
+                    ainsi qu’en réseaux et sécurité.
+                </p>
+                <p>
+                    Au fil de mes études et de mes projets, j’ai travaillé avec différents langages et frameworks
+                    (<em>HTML, CSS, JavaScript, PHP/Laravel, Python, Java, C/C++…</em>) ainsi qu’avec des outils d’analyse et de modélisation
+                    (<em>Jupyter, Hadoop, Merise, UML</em>). J’ai également exploré la configuration et la sécurisation des réseaux
+                    (<em>LAN, WAN, VPN, protocoles réseau, cybersécurité</em>).
+                </p>
+                <p>
+                    Aujourd’hui, je conçois et développe des applications web complètes avec :
+                </p>
+                <ul class="about-highlights">
+                    <li>
+                        <span class="chip">
+                            <!-- Front-end SVG Icon -->
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4 5h16v14H4z" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                                <path d="M4 9h16" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="7" cy="7" r="1" fill="currentColor"/>
+                                <circle cx="10" cy="7" r="1" fill="currentColor"/>
+                                <circle cx="13" cy="7" r="1" fill="currentColor"/>
+                            </svg>
+                            Front-end : React, Next.js, TailwindCSS
+                        </span>
+                    </li>
+                    <li>
+                        <span class="chip">
+                            <!-- Back-end SVG Icon -->
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4 8c0-1.657 4.03-3 9-3s9 1.343 9 3-4.03 3-9 3-9-1.343-9-3Z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M4 12c0 1.657 4.03 3 9 3s9-1.343 9-3" stroke="currentColor" stroke-width="1.5" opacity=".6"/>
+                                <path d="M4 16c0 1.657 4.03 3 9 3s9-1.343 9-3" stroke="currentColor" stroke-width="1.5" opacity=".3"/>
+                            </svg>
+                            Back-end : Node.js, Express.js, MongoDB
+                        </span>
+                    </li>
+                    <li>
+                        <span class="chip">
+                            <!-- AI SVG Icon -->
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M7 12h10M12 8v8" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            IA : Intégration de modules d’intelligence artificielle pour des projets plus intelligents et innovants
+                        </span>
+                    </li>
+                </ul>
+                <p>
+                    Ce qui me motive chaque jour, c’est la curiosité, l’envie d’apprendre et la volonté de transformer des idées en produits concrets,
+                    utiles et performants.
+                </p>
+                <div class="stack">
+                    <div class="stack-title"><i class="fa-solid fa-layer-group"></i> Stack principale</div>
+                    <div class="stack-icons">
+                        <i class="fa-brands fa-react" title="React"></i>
+                        <svg viewBox="0 0 48 48" aria-hidden="true" class="svg-icon" title="Next.js"><path fill="currentColor" d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0Zm10.59 34.17L26.37 20.64V34h-3V14h3.11l8.64 13.19V14h3v20.17h-3.53Z"/></svg>
+                        <i class="fa-brands fa-node-js" title="Node.js"></i>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" class="svg-icon" title="Express.js"><path fill="currentColor" d="M0 13.5v-3h6.9v3H0zm9.2 0L13 8.4l3.8 5.1L21 8.4l3.8 5.1h-2.8l-1-1.4-1 1.4h-2.8l-1-1.4-1 1.4H9.2z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" class="svg-icon" title="TailwindCSS"><path fill="currentColor" d="M12.002 4.5c-3.2 0-5.2 1.6-6 4.8C7.002 7.7 8.602 7 10.802 7c3.3 0 4.2 1.6 5.1 3.5.9 1.9 2 3.5 5.1 3.5 3.2 0 5.2-1.6 6-4.8-1.9 1.6-3.5 2.3-5.7 2.3-3.3 0-4.2-1.6-5.1-3.5-.9-1.9-2-3.5-5.1-3.5Zm-6 7c-3.2 0-5.2 1.6-6 4.8 1.9-1.6 3.5-2.3 5.7-2.3 3.3 0 4.2 1.6 5.1 3.5.9 1.9 2 3.5 5.1 3.5 3.2 0 5.2-1.6 6-4.8-1.9 1.6-3.5 2.3-5.7 2.3-3.3 0-4.2-1.6-5.1-3.5-.9-1.9-2-3.5-5.1-3.5Z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" class="svg-icon" title="MongoDB"><path fill="currentColor" d="M11.6 0s.6 2.6-1.5 4.7C7.9 6.9 7.6 9 7.6 9s-.4 2.7 1.4 5.4c1.8 2.7 2.6 3.4 2.6 3.4s.8-.7 2.6-3.4c1.8-2.7 1.4-5.4 1.4-5.4s-.3-2.1-2.5-4.3C11 2.6 11.6 0 11.6 0Z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="about-aside animated-element">
+                <div class="about-card">
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <h3>Curiosité & Innovation</h3>
+                    <p>Apprendre en continu, expérimenter et créer des produits utiles et performants.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Qualité & Sécurité</h3>
+                    <p>Bonnes pratiques, performances, réseaux et cybersécurité intégrés dès la conception.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3>IA intégrée</h3>
+                    <p>Des modules d’IA pour rendre les applications plus intelligentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+   <!-- Services Section -->
+<section class="services" id="services">
+    <h2 class="section-title">Ce que je fais</h2>
+    <div class="services-grid">
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h3>Développement Web</h3>
+            <p>Conception et développement de sites et applications web modernes, responsives et optimisés, avec React, Next.js, TailwindCSS, Node.js et MongoDB.</p>
+        </div>
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Développement Mobile</h3>
+            <p>Création d’applications mobiles performantes et intuitives (natives et hybrides) offrant une expérience fluide sur Android et iOS.</p>
+        </div>
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>Intelligence Artificielle</h3>
+            <p>Intégration de fonctionnalités intelligentes (IA, automatisation, chatbots) pour rendre les applications plus interactives et performantes.</p>
+        </div>
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-database"></i>
+            </div>
+            <h3>Analyse & Big Data</h3>
+            <p>Traitement et analyse de données avec Jupyter et Hadoop, pour extraire des insights pertinents et appuyer la prise de décision.</p>
+        </div>
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-network-wired"></i>
+            </div>
+            <h3>Réseaux & Sécurité</h3>
+            <p>Configuration LAN, WAN et VPN, avec des connaissances en protocoles réseaux, cybersécurité et prévention des attaques.</p>
+        </div>
+
+        <div class="service-card animated-element">
+            <div class="service-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>Innovation & Projets</h3>
+            <p>Initiation et gestion de projets innovants, combinant technologie et vision business pour créer de la valeur ajoutée.</p>
+        </div>
+
+    </div>
+</section>
+
+    
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">Mon Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="project-card animated-element">
+                <img src="./img/SmartNote.jpg" alt="Dashboard site E-commerce" class="project-img">
+                <div class="project-info">
+                    <h3>SmartNote – La prise de notes intelligente</h3>
+                    <p>SmartNote est une application web moderne qui facilite la prise de notes avec correction en temps réel et génération automatique de résumés clairs et pertinents grâce à l’intelligence artificielle intégrée.</p>
+                    <a href="https://smartnote-one.vercel.app" target="_blank" class="project-link">
+                       Voir le projet
+                    </a>
+                </div>
+            </div>
+            <div class="project-card animated-element">
+                <img src="./img/Tricycle.jpg" alt="Application de Gestion de tache en ligne" class="project-img">
+                <div class="project-info">
+                    <h3> Plateforme de réservation de tricycles</h3>
+                    <p>Application conçue pour les petites villes où les tricycles sont courants. Lorsqu’un client réserve, la demande s’affiche chez les conducteurs disponibles qui peuvent accepter et démarrer le trajet. Le système facilite les déplacements locaux en temps réel.</p>
+                    <a href="https://mon-tricycle.vercel.app" target="_blank" class="project-link">
+                        Voir le projet
+                    </a>
+                </div>
+            </div>
+            <div class="project-card animated-element">
+                <img src="./img/landing.png" alt="Dealsur – Plateforme de transactions sécurisées" class="project-img">
+                <div class="project-info">
+                    <h3>Landing Page dynamique de formations</h3>
+                    <p>Page de présentation de formations alimentée dynamiquement depuis un dashboard. L’admin peut ajouter, modifier ou supprimer des formations et témoignages, gérer les inscrits et exporter leur liste en PDF. L’interface est conçue pour une gestion fluide et centralisée du contenu.</p>
+                    <a href="https://landing-app-1ke2.onrender.com" target="_blank" class="project-link">
+                        Voir sur GitHub 
+                    </a>
+                </div>
+            </div>
+            <div class="project-card animated-element">
+                <img src="./img/Mentora AI.jpg" alt="Dashboard site E-commerce" class="project-img">
+                <div class="project-info">
+                    <h3>Mentora - assistante IA d’apprentissage</h3>
+                    <p>Mentora est une assistante virtuelle d’apprentissage basée sur l’IA, conçue pour accompagner les élèves de manière interactive, intelligente et bienveillante. Elle agit comme une professeure virtuelle accessible à tout moment.</p>
+                    <a href="https://mentora-ai.onrender.com" target="_blank" class="project-link">
+                        Voir le projet
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CV Section -->
+    <section class="cv" id="cv">
+        <h2 class="section-title">Mon CV</h2>
+        <div class="cv-container">
+            <div class="cv-download animated-element">
+                <p>Téléchargez mon CV complet en PDF :</p>
+                <a href="./cv kouadio bah Rodolphe.pdf" class="download-btn" download>
+                    <i class="fas fa-download"></i> Télécharger le CV
+                </a>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item animated-element">
+                    <h3>Formations</h3>
+                    <ul>
+                        <li>Licence 3 en Informatique Génie logiciel, Université Nord-Sud Institut Famah (2023 - 2024)</li>
+                        <li>Licence 2 en Informatique Génie logiciel, Université Nord-Sud Institut Famah (2022 - 2023)</li>
+                        <li>Licence 1 en Informatique Génie logiciel, Université Nord-Sud Institut Famah (2021 - 2022)</li>
+                    </ul>
+                </div>
+                <div class="timeline-item animated-element">
+                    <h3>Compétences</h3>
+                    <ul>
+                        <li><strong>Front-end :</strong> HTML5, CSS3, JavaScript, TypeScript, TailwindCSS</li>
+                        <li><strong>Back-end :</strong> Node.js, Express.js, Python, PHP/Laravel, Java</li>
+                        <li><strong>Bases de données :</strong> MongoDB, MySQL</li>
+                        <li><strong>Frameworks & Librairies :</strong> React, React Native, Next.js</li>
+                        <li><strong>Outils & Environnements :</strong> Git/GitHub, Cloudinary, Windsurf IDE, VS Code, IntelliJ IDEA, Android Studio, Postman</li>
+                        <li><strong>Analyse & Données :</strong> Jupyter, Analyse et nettoyage de données, Big Data avec Hadoop</li>
+                        <li><strong>Réseaux & Sécurité :</strong> Configuration LAN/WAN/VPN, protocoles réseaux, cybersécurité, cryptage et compression de données</li>
+                        <li><strong>Autres :</strong> Conception UML/Merise, Veille technologique, Débogage & tests, Méthodologies Agile/Scrum</li>
+                        <li><strong>Innovation :</strong> Développement et intégration de Chatbots, implémentation de modèles d’Intelligence Artificielle</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contactez-moi</h2>
+        <div class="contact-container">
+            <div class="contact-info animated-element">
+                <h3>Coordonnées</h3>
+                <ul class="contact-details">
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Téléphone</strong><br>
+                            +225 05 02 32 99 09
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            rodolphekouadio225@icloud.com
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Adresse</strong><br>
+                            Abidjan, Port-Bouet Phare rues des caraibes 1560
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="contact-form animated-element">
+                <form action="https://formsubmit.co/kouadiobahrodolphe@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="./merci.html">
+                    <div class="form-group">
+                        <label for="name">Votre Nom</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Votre Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo"></div>
+            <p class="copyright"> 2025 Kouadio Bah Rodolphe. Tous droits réservés.</p>
+        </div>
+    </footer>
+    
+    <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</body>
+</html>
