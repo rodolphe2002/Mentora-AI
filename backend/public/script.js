@@ -1,6 +1,6 @@
 const base = window.location.hostname === "localhost"
   ? "http://localhost:5000"
-  : "https://mentora-ai.onrender.com";
+  : "";
 
 // === Récupération des éléments du DOM ===
 const toggleBtn = document.getElementById("toggle-btn");
